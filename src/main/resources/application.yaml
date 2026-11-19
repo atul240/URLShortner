@@ -6,7 +6,8 @@ spring:
       host: ${SPRING_DATA_REDIS_HOST:localhost}
       port: ${SPRING_DATA_REDIS_PORT:6379}
       password: ${SPRING_DATA_REDIS_PASSWORD:}
-      timeout: 2s
+      # Cross-region and TLS connections need more than 2s; override with SPRING_DATA_REDIS_TIMEOUT.
+      timeout: ${SPRING_DATA_REDIS_TIMEOUT:10s}
       ssl:
         enabled: ${SPRING_DATA_REDIS_SSL:false}
 
