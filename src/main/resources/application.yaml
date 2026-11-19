@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: URLShortner
+  data:
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:localhost}
+      port: ${SPRING_DATA_REDIS_PORT:6379}
+      password: ${SPRING_DATA_REDIS_PASSWORD:}
+      timeout: 2s
+      ssl:
+        enabled: ${SPRING_DATA_REDIS_SSL:false}
+
+server:
+  port: ${PORT:8080}
+  forward-headers-strategy: native
+
+app:
+  base-url: ${APP_BASE_URL:http://localhost:8080}
+
+logging:
+  level:
+    com.urlshortener: DEBUG
+

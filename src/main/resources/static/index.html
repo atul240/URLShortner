@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>URL Shortener</title>
+  <link rel="stylesheet" href="/ui/app.css">
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <h1>URL Shortener</h1>
+      <p class="sub">Turn a long link into a short one. Use your own code if you like.</p>
+    </header>
+
+    <section class="card" aria-labelledby="shorten-title">
+      <h2 id="shorten-title">Shorten a URL</h2>
+      <form id="shorten-form" novalidate>
+        <label for="long-url">Long URL</label>
+        <input id="long-url" name="longUrl" type="text" placeholder="https://example.com/some/long/path" autocomplete="off" required>
+
+        <label for="custom-code">Custom code <span class="hint">(optional: letters, digits, <code>-</code> and <code>_</code>, up to 32)</span></label>
+        <input id="custom-code" name="customCode" type="text" placeholder="my-link" autocomplete="off" maxlength="32">
+
+        <button id="shorten-btn" type="submit">Shorten</button>
+      </form>
+
+      <div id="status" class="status" role="status" aria-live="polite" hidden></div>
+
+      <div id="result" class="result" hidden>
+        <p class="label">Your short link</p>
+        <div class="row">
+          <a id="result-link" href="#" target="_blank" rel="noopener"></a>
+          <button id="copy-btn" type="button" class="secondary">Copy</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="stats-title">
+      <h2 id="stats-title">Check a link's stats</h2>
+      <form id="stats-form" novalidate>
+        <label for="stats-code">Short code</label>
+        <div class="row">
+          <input id="stats-code" name="code" type="text" placeholder="Aa5" autocomplete="off">
+          <button id="stats-btn" type="submit" class="secondary">Look up</button>
+        </div>
+      </form>
+      <div id="stats-out" class="stats" hidden></div>
+    </section>
+
+  </main>
+
+  <script src="/ui/app.js"></script>
+</body>
+</html>

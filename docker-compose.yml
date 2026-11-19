@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: url-shortner-redis
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - app-net
+  app:
+    build: .
+    container_name: url-shortner-app
+    ports:
+        - "8080:8080"
+    depends_on:
+      redis:
+          condition: service_healthy
+    environment:
+      - SPRING_DATA_REDIS_HOST=redis
+      - SPRING_DATA_REDIS_PORT=6379
+      - JAVA_TOOL_OPTIONS=-Djava.net.preferIPv4Stack=true
+    restart: on-failure
+    networks:
+      - app-net
+
+volumes:
+  redis_data:
+  
+networks:
+  app-net:
+    driver: bridge
